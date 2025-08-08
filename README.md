@@ -56,15 +56,15 @@ git clone https://gitlab.com/sparkletel-group/Sway-Dots-Install.git
 ```
 ### 2. Make the script executable
 ```
-cd ./installer.sh
+cd Sway-Dots-Install
 ```
 ```
-chmod +x ./installer.sh
+chmod +x installer.rb
 ```
 ### 3. Run the installer
 Make sure to select the correct distro or the install will fail!
 ```
-./installer.sh
+./installer.rb
 ```
 Now Reboot 
 
