@@ -1,4 +1,4 @@
-# Sway-Dots-Install
+# Sway-Dots-Install THIS IS NOT DONE YET DO NOT RUN ANY COMMANDS!
 A semi-user friendly everforest themed sway config
 
 This script is made for linux with bash
@@ -62,10 +62,45 @@ cd Sway-Dots-Install
 chmod +x installer.rb
 ```
 ### 3. Run the installer
-Make sure to select the correct distro or the install will fail!
+The installer is written in ruby to run the installer you will need to install the ruby programming language!
+If you do not what ruby on you system you can uninstall it after.
+
+Arch
+
+Install
+```
+sudo pacman -S ruby
+```
+Uninstall
+```
+sudo pacman -Rns ruby
+```
+Debian/Ubuntu based
+
+Install
+```
+sudo apt install ruby-full
+```
+Uninstall
+```
+sudo apt purge ruby-full
+```
+Fedora
+
+Install
+```
+sudo dnf install ruby
+```
+Uninstall
+```
+sudo dnf remove ruby
+```
+Now Run
 ```
 ./installer.rb
 ```
+And Make sure to select the correct distro or the install will fail!
+
 Now Reboot 
 
 
