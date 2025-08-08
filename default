@@ -1,0 +1,199 @@
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+# Add Vim key support
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Set default terminal emulator
+set $term ghostty
+
+# Application launcher
+set $launcher fuzzel
+
+set $powermenu ~/.config/sway/scripts/power_menu.sh
+    bindsym $mod+Return exec $term
+
+    bindsym $mod+Shift+e exec $powermenu
+    bindsym $mod+q kill
+    bindsym $mod+d exec $launcher 
+    bindsym $mod+Shift+d exec $menu
+    bindsym $mod+f1 exec gtklock
+    floating_modifier $mod normal
+    bindsym $mod+Shift+c reload
+    bindsym $mod+s exec swaync-client -t -sw
+
+
+    bindsym {
+        $mod+Ctrl+Left focus left
+        $mod+Ctrl+Down focus down
+        $mod+Ctrl+Up focus up
+        $mod+Ctrl+Right focus right
+        $mod+$left focus left
+        $mod+$down focus down
+        $mod+$up focus up
+        $mod+$right focus right
+        $mod+Shift+Left move left
+        $mod+Shift+Down move down
+        $mod+Shift+Up move up
+        $mod+Shift+Right move right
+        $mod+Shift+$left move left
+        $mod+Shift+$down move down
+        $mod+Shift+$up move up
+        $mod+Shift+$right move right
+    }
+
+#
+# workspaces
+
+    bindcode {
+        $mod+10 workspace number 1
+        $mod+11 workspace number 2
+        $mod+12 workspace number 3
+        $mod+13 workspace number 4
+        $mod+14 workspace number 5
+        $mod+15 workspace number 6
+        $mod+16 workspace number 7
+        $mod+17 workspace number 8
+        $mod+18 workspace number 9
+        $mod+19 workspace number 10
+
+        # Move focused container to workspace
+        $mod+Shift+10 move container to workspace number 1
+        $mod+Shift+11 move container to workspace number 2
+        $mod+Shift+12 move container to workspace number 3
+        $mod+Shift+13 move container to workspace number 4
+        $mod+Shift+14 move container to workspace number 5
+        $mod+Shift+15 move container to workspace number 6
+        $mod+Shift+16 move container to workspace number 7
+        $mod+Shift+17 move container to workspace number 8
+        $mod+Shift+18 move container to workspace number 9
+        $mod+Shift+19 move container to workspace number 10
+    }
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+
+#
+# Layout stuff:
+#
+    # Set how the current window will be split
+    # Split the window vertically
+    bindsym $mod+v splitv
+    # Split the window horizontally
+    bindsym $mod+b splith
+
+    # Switch the current container between different layout styles
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+e move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+Control+e scratchpad show
+
+#
+# Resizing containers:
+#
+    bindsym {
+        # Resize with arrow keys
+        $mod+Alt+Right resize shrink width 10 px
+        $mod+Alt+Up resize grow height 10 px
+        $mod+Alt+Down resize shrink height 10 px
+        $mod+Alt+Left resize grow width 10 px
+        # Resize with Vim keys
+        $mod+ctrl+$right resize shrink width 10 px
+        $mod+ctrl+$up resize grow height 10 px
+        $mod+ctrl+$down resize shrink height 10 px
+        $mod+ctrl+$left resize grow width 10 px
+    }
+
+    # Resize floating windows with mouse scroll:
+    bindsym --whole-window --border {
+        # Resize vertically
+        $mod+button4 resize shrink height 5 px or 5 ppt
+        $mod+button5 resize grow height 5 px or 5 ppt
+        # Resize horizontally
+        $mod+Shift+button4 resize shrink width 5 px or 5 ppt
+        $mod+Shift+button5 resize grow width 5 px or 5 ppt
+    }
+
+#
+# Media Keys
+#
+    bindsym {
+        # Volume
+        $mod+v+Right exec pamixer -ui 2
+        $mod+v+Left exec pamixer -ud 2
+        $mod+v+x exec pamixer --toggle-mute
+
+        # Player
+        $mod+Down exec playerctl play-pause
+        $mod+Right exec playerctl next
+        $mod+Left exec playerctl previous
+
+        # Backlight
+        $mod+b+equal exec brightnessctl -c backlight set +5%
+        $mod+b+minus exec brightnessctl -c backlight set 5%-
+    }
+bindsym {
+        # Volume
+        XF86AudioRaiseVolume exec pamixer -ui 2
+        XF86AudioLowerVolume exec pamixer -ud 2
+        XF86AudioMute exec pamixer --toggle-mute
+
+        # Player
+        XF86AudioPlay exec playerctl play-pause
+        XF86AudioNext exec playerctl next
+        XF86AudioPrev exec playerctl previous
+
+        # Backlight
+        XF86MonBrightnessUp exec brightnessctl -c backlight set +5%
+        XF86MonBrightnessDown exec brightnessctl -c backlight set 5%-
+    }
+
+#
+# App shortcuts
+#
+    # Launch the file explorer
+    bindsym $mod+y exec ghostty -e yazi
+    bindsym $mod+t exec thunar
+    # Launch the browser
+    bindsym $mod+z exec io.gitlab.librewolf-community
+    bindsym $mod+z+Shift exec brave
+
+    # Launch the clipboard manager
+    bindsym $mod+Ctrl+v exec cliphist list | fuzzel -d -w 90 -l 30 -p "Select an entry to copy it to your clipboard buffer:"| cliphist decode | wl-copy
+    # Delete an entry from the clipboard manager
+    bindsym $mod+Ctrl+x exec cliphist list | fuzzel -d -w 90 -l 30 -t cc9393ff -S cc9393ff -p "Select an entry to delete it from cliphist:"| cliphist delete
+    # Note: you can clear all cliphist entries by running `cliphist wipe`
+
+#
+# Screenshots
+#
+    # Snip a selection and pipe to swappy
+    bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
+    # Screenshot a window and pipe to swappy
+    bindsym Ctrl+Insert exec ~/.config/sway/scripts/screenshot_window.sh
+    # Screenshot the current display and pipe to swappy
+    bindsym Shift+Insert exec ~/.config/sway/scripts/screenshot_display.sh
+
