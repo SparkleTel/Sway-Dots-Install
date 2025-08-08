@@ -65,7 +65,7 @@ chmod +x installer.rb
 The installer is written in ruby to run the installer you will need to install the ruby programming language!
 If you do not what ruby on you system you can uninstall it after.
 
-Arch
+### Arch
 
 Install
 ```
